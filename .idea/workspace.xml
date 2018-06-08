@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec7c71d1-4dc3-4a72-8da4-4ba0bdf3501f" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/oop/ex6/main/Var.java" />
-      <change beforePath="$PROJECT_DIR$/src/oop/ex6/main/Sjavac.java" afterPath="$PROJECT_DIR$/src/oop/ex6/main/Sjavac.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/oop/ex6/main/LineInfo.java" />
+      <change beforePath="$PROJECT_DIR$/src/oop/ex6/main/Var.java" afterPath="$PROJECT_DIR$/src/oop/ex6/main/Var.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,11 +25,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Var.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Var.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/oop/ex6/main/Var.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+            <state relative-caret-position="275">
+              <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+              <folding>
+                <element signature="e#572#573#0" expanded="true" />
+                <element signature="e#602#603#0" expanded="true" />
+                <element signature="e#633#634#0" expanded="true" />
+                <element signature="e#663#664#0" expanded="true" />
+                <element signature="e#701#702#0" expanded="true" />
+                <element signature="e#737#738#0" expanded="true" />
+                <element signature="e#773#774#0" expanded="true" />
+                <element signature="e#809#810#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LineInfo.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/oop/ex6/main/LineInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -56,6 +75,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/oop/ex6/main/Sjavac.java" />
+        <option value="$PROJECT_DIR$/src/oop/ex6/main/Var.java" />
+        <option value="$PROJECT_DIR$/src/oop/ex6/main/LineInfo.java" />
       </list>
     </option>
   </component>
@@ -281,8 +302,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/oop/ex6/main/Var.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        <state relative-caret-position="275">
+          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          <folding>
+            <element signature="e#572#573#0" expanded="true" />
+            <element signature="e#602#603#0" expanded="true" />
+            <element signature="e#633#634#0" expanded="true" />
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#701#702#0" expanded="true" />
+            <element signature="e#737#738#0" expanded="true" />
+            <element signature="e#773#774#0" expanded="true" />
+            <element signature="e#809#810#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/oop/ex6/main/LineInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
           <folding />
         </state>
       </provider>
