@@ -15,14 +15,16 @@ public class MatcherWrapper {
     private Matcher matcher;
 
     /*  */
-    public static final String REGEX_1 = "";
-    public static final String REGEX_2 = "";
-    public static final String REGEX_3 = "";
-    public static final String REGEX_4 = "";
-    public static final String REGEX_5 = "";
-    public static final String REGEX_6 = "";
+    public static final String REGEX_1 = " *(final )? *(int|double|boolean|String|char) +" +
+            "(_\\w+|[a-zA-Z]\\w*);";
+    public static final String REGEX_2 =
+            " *(int|double|boolean|String|char) +(_\\w+|[a-zA-Z]\\w*) *= *([^\\n\\r]*) *; *";
+    public static final String REGEX_3 = " +(_\\w+|[a-zA-Z]\\w*) *= *([^\\n\\r]*) *; *";
+    public static final String REGEX_4 = " *} *";
+    public static final String REGEX_5 = " *return *; *";
+    public static final String FUNCTION_DECLARATION = "6";
 
-    public static final String[] REGEXES = {REGEX_1, REGEX_2, REGEX_3, REGEX_4, REGEX_5, REGEX_6};
+    public static final String[] REGEXES = {REGEX_1, REGEX_2, REGEX_3, REGEX_4, REGEX_5, FUNCTION_DECLARATION};
 
     /**
      *
@@ -44,8 +46,8 @@ public class MatcherWrapper {
         for (int i = 0; i < REGEXES.length; i++) {
             if (patterns[i].matcher(line).matches()){
                 String[] lineInfoArgs = new String[matcher.groupCount()];
-                for (int j = 0; j < matcher.groupCount(); j++) {
-                    lineInfoArgs[i] = matcher.group(i);
+                for (int j = 1; j <= matcher.groupCount(); j++) {
+                    lineInfoArgs[j] = matcher.group(j);
                 }
                 return new LineInfo(REGEXES[i], lineInfoArgs);
             }
