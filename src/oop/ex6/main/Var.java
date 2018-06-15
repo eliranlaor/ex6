@@ -12,12 +12,18 @@ public class Var{
     private boolean isInitialized;
     private int varType;
     private boolean isFinal;
+    private String varName;
     /*object parameters - end*/
 
-    public Var(boolean isInitialized, int varType, boolean isFinal){
+    public Var(boolean isInitialized, int varType, boolean isFinal, String name){
         this.isInitialized = isInitialized;
         this.varType = varType;
         this.isFinal = isFinal;
+        this.varName = name;
+    }
+
+    public String getVarName() {
+        return varName;
     }
 
     public boolean isFinal() {
