@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec7c71d1-4dc3-4a72-8da4-4ba0bdf3501f" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/oop/ex6/main/FileParser.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/oop/ex6/main/GlobalScope.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/oop/ex6/main/InternalScope.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/oop/ex6/main/TestBitches.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/oop/ex6/main/MatcherWrapper.java" afterPath="$PROJECT_DIR$/src/oop/ex6/main/MatcherWrapper.java" />
-      <change beforePath="$PROJECT_DIR$/src/oop/ex6/main/Scope.java" afterPath="$PROJECT_DIR$/src/oop/ex6/main/Scope.java" />
       <change beforePath="$PROJECT_DIR$/src/oop/ex6/main/Var.java" afterPath="$PROJECT_DIR$/src/oop/ex6/main/Var.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -36,22 +30,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Var.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Var.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/oop/ex6/main/Var.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+            <state relative-caret-position="0">
+              <caret line="10" column="27" lean-forward="true" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
               <folding>
-                <element signature="e#644#645#0" expanded="true" />
-                <element signature="e#674#675#0" expanded="true" />
-                <element signature="e#706#707#0" expanded="true" />
-                <element signature="e#736#737#0" expanded="true" />
-                <element signature="e#767#768#0" expanded="true" />
-                <element signature="e#797#798#0" expanded="true" />
-                <element signature="e#835#836#0" expanded="true" />
-                <element signature="e#871#872#0" expanded="true" />
-                <element signature="e#907#908#0" expanded="true" />
-                <element signature="e#943#944#0" expanded="true" />
+                <element signature="e#731#732#0" expanded="true" />
+                <element signature="e#761#762#0" expanded="true" />
+                <element signature="e#793#794#0" expanded="true" />
+                <element signature="e#823#824#0" expanded="true" />
+                <element signature="e#854#855#0" expanded="true" />
+                <element signature="e#884#885#0" expanded="true" />
+                <element signature="e#922#923#0" expanded="true" />
+                <element signature="e#958#959#0" expanded="true" />
+                <element signature="e#994#995#0" expanded="true" />
+                <element signature="e#1030#1031#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -121,11 +115,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileParser.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FileParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/oop/ex6/main/FileParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="98" column="39" lean-forward="true" selection-start-line="98" selection-start-column="39" selection-end-line="98" selection-end-column="39" />
+            <state relative-caret-position="332">
+              <caret line="101" column="13" lean-forward="true" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -170,13 +164,13 @@
       <list>
         <option value="$PROJECT_DIR$/src/oop/ex6/main/Sjavac.java" />
         <option value="$PROJECT_DIR$/src/oop/ex6/main/LineInfo.java" />
-        <option value="$PROJECT_DIR$/src/oop/ex6/main/Var.java" />
         <option value="$PROJECT_DIR$/src/oop/ex6/main/GlobalScope.java" />
         <option value="$PROJECT_DIR$/src/oop/ex6/main/TestBitches.java" />
         <option value="$PROJECT_DIR$/src/oop/ex6/main/MatcherWrapper.java" />
         <option value="$PROJECT_DIR$/src/oop/ex6/main/Scope.java" />
         <option value="$PROJECT_DIR$/src/oop/ex6/main/InternalScope.java" />
         <option value="$PROJECT_DIR$/src/oop/ex6/main/FileParser.java" />
+        <option value="$PROJECT_DIR$/src/oop/ex6/main/Var.java" />
       </list>
     </option>
   </component>
@@ -422,14 +416,14 @@
         <state relative-caret-position="374">
           <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
           <folding>
-            <element signature="e#706#707#0" expanded="true" />
-            <element signature="e#736#737#0" expanded="true" />
-            <element signature="e#767#768#0" expanded="true" />
-            <element signature="e#797#798#0" expanded="true" />
-            <element signature="e#835#836#0" expanded="true" />
-            <element signature="e#871#872#0" expanded="true" />
-            <element signature="e#907#908#0" expanded="true" />
-            <element signature="e#943#944#0" expanded="true" />
+            <element signature="e#793#794#0" expanded="true" />
+            <element signature="e#823#824#0" expanded="true" />
+            <element signature="e#854#855#0" expanded="true" />
+            <element signature="e#884#885#0" expanded="true" />
+            <element signature="e#922#923#0" expanded="true" />
+            <element signature="e#958#959#0" expanded="true" />
+            <element signature="e#994#995#0" expanded="true" />
+            <element signature="e#1030#1031#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -492,25 +486,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/oop/ex6/main/Var.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-          <folding>
-            <element signature="e#644#645#0" expanded="true" />
-            <element signature="e#674#675#0" expanded="true" />
-            <element signature="e#706#707#0" expanded="true" />
-            <element signature="e#736#737#0" expanded="true" />
-            <element signature="e#767#768#0" expanded="true" />
-            <element signature="e#797#798#0" expanded="true" />
-            <element signature="e#835#836#0" expanded="true" />
-            <element signature="e#871#872#0" expanded="true" />
-            <element signature="e#907#908#0" expanded="true" />
-            <element signature="e#943#944#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/oop/ex6/main/MatcherWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -567,10 +542,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/oop/ex6/main/FileParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="98" column="39" lean-forward="true" selection-start-line="98" selection-start-column="39" selection-end-line="98" selection-end-column="39" />
+        <state relative-caret-position="332">
+          <caret line="101" column="13" lean-forward="true" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/oop/ex6/main/Var.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="10" column="27" lean-forward="true" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+          <folding>
+            <element signature="e#731#732#0" expanded="true" />
+            <element signature="e#761#762#0" expanded="true" />
+            <element signature="e#793#794#0" expanded="true" />
+            <element signature="e#823#824#0" expanded="true" />
+            <element signature="e#854#855#0" expanded="true" />
+            <element signature="e#884#885#0" expanded="true" />
+            <element signature="e#922#923#0" expanded="true" />
+            <element signature="e#958#959#0" expanded="true" />
+            <element signature="e#994#995#0" expanded="true" />
+            <element signature="e#1030#1031#0" expanded="true" />
           </folding>
         </state>
       </provider>

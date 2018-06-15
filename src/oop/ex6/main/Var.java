@@ -1,11 +1,13 @@
 package oop.ex6.main;
 
-public class Var{
+public abstract class Var{
 
     /*magic numbers*/
     private final int INT_INDEX = 0;
     private final int DOUBLE_INDEX = 1;
     private final int BOOLEAN_INDEX = 2;
+    private final int STRING_INDEX = 2;
+    private final int CHAR_INDEX = 2;
     /*magic numbers - end*/
 
     /*object parameters*/
