@@ -20,11 +20,11 @@ public class MatcherWrapper {
     public static final String REGEX_2 =
             " *(int|double|boolean|String|char) +(_\\w+|[a-zA-Z]\\w*) *= *([^\\n\\r]*) *; *";
     public static final String REGEX_3 = " +(_\\w+|[a-zA-Z]\\w*) *= *([^\\n\\r]*) *; *";
-    public static final String REGEX_4 = " *} *";
+    public static final String END_SCOPE = " *} *";
     public static final String REGEX_5 = " *return *; *";
     public static final String FUNCTION_DECLARATION = "6";
 
-    public static final String[] REGEXES = {REGEX_1, REGEX_2, REGEX_3, REGEX_4, REGEX_5, FUNCTION_DECLARATION};
+    public static final String[] REGEXES = {REGEX_1, REGEX_2, REGEX_3, END_SCOPE, REGEX_5, FUNCTION_DECLARATION};
 
     /**
      *
