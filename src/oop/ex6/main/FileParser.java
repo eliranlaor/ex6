@@ -108,11 +108,11 @@ public class FileParser {
                     //TODO - need to throw an exception
                 }
                 String value = args[1].trim();
-                if(value.startsWith("\\") &&)
+                if(value.startsWith("\"") && value.endsWith("\"")){
 
 
 
-                break;
+                    break;
             case MatcherWrapper.REGEX_3:
                 break;
         }

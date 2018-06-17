@@ -1,13 +1,15 @@
 package oop.ex6.main.sjavaVars;
 
+import oop.ex6.main.SyntaxException;
+
 public abstract class Var{
 
     /*magic numbers*/
     private final int INT_INDEX = 0;
     private final int DOUBLE_INDEX = 1;
     private final int BOOLEAN_INDEX = 2;
-    private final int STRING_INDEX = 2;
-    private final int CHAR_INDEX = 2;
+    private final int STRING_INDEX = 3;
+    private final int CHAR_INDEX = 4;
     /*magic numbers - end*/
 
     /*object parameters*/
@@ -38,6 +40,12 @@ public abstract class Var{
 
     public void setInitialized() {
         isInitialized = true;
+    }
+
+    public void setValue(String value) throws SyntaxException{}
+
+    public boolean areTypesMatch(int firstType, int secondType){
+
     }
 
 }
