@@ -25,6 +25,15 @@ public abstract class Scope {
         this.vars.add(var);
     }
 
-    public Var containsVar(String name){return null;}
+    public Var containsInScope(String name){
+        for (Var v : getVars()){
+            if(v.getVarName().equals(name)){
+                return v;
+            }
+        }
+        return null;
+    }
+
+    public Var containsRecorsive(String name){return null;}
 
 }

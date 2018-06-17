@@ -1,6 +1,7 @@
 package oop.ex6.main.sjavaVars;
 
 import oop.ex6.main.InitializationException;
+import oop.ex6.main.SyntaxException;
 
 public class VarFactory {
     public VarFactory(){
@@ -25,6 +26,9 @@ public class VarFactory {
         catch(InitializationException e){
             return null;
             //TODO - handle exception
+        }
+        catch(SyntaxException e){
+            return null;
         }
     }
 }

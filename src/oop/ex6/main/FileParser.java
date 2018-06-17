@@ -61,7 +61,7 @@ public class FileParser {
         }
     }
 
-    private void updateGlobalScope(GlobalScope global, LineInfo currentLineInfo) { //TODO
+    private void updateGlobalScope(GlobalScope global, LineInfo currentLineInfo) throws SyntaxException{ //TODO
 
         //if we encounter if/while blocks - we need to throw an exception
 
@@ -83,9 +83,9 @@ public class FileParser {
                 index++;
                 String[] varNames = args[index].replaceAll(" ", "").split(",");
                 //varName will contain "NAME=VALUE" or "NAME"
-                for(int i = index; i < args.length; i++){
-                    String[] tempString = args[i].split("=");
-                    if(global.containsVar(tempString[0]) != null){
+                for(int i = 0; i < varNames.length; i++){
+                    String[] tempString = varNames[i].split("=");
+                    if(global.containsInScope(tempString[0]) != null){
                         //TODO throw exception - trying to initial an already existing var
                     }
                     if(tempString.length > 1){ //declaring and initialing var
@@ -100,7 +100,7 @@ public class FileParser {
                 break;
             case MatcherWrapper.REGEX_2:
                 //variable initialization
-                Var var = global.containsVar(args[0]);
+                Var var = global.containsRecorsive(args[0]);
                 if(var == null){
                     //TODO - need to throw an exception
                 }
@@ -108,10 +108,12 @@ public class FileParser {
                     //TODO - need to throw an exception
                 }
                 String value = args[1].trim();
-                Var secondVar = global.containsVar(value);
+                Var secondVar = global.containsRecorsive(value);
                 if(secondVar != null){
                     if(secondVar.isInitialized()) {
-
+                        if(!var.areTypesMatch(var.getVarType(), secondVar.getVarType())){
+                            throw new SyntaxException();
+                        }
                         var.setInitialized();
                     }
                     else{
@@ -121,11 +123,16 @@ public class FileParser {
                 else{
                     //second var isn't a variable
                     var.setValue(value); // check validity of value
-                    var.setInitialized();
                 }
                 break;
-            case MatcherWrapper.REGEX_3:
+            case Regexes.EMPTY_LINE_COMMENT:
+                //need to ignore :)
                 break;
+            case Regexes.FUNCTION_DECLERATION:
+                global.addFunctionDeclaration(currentLineInfo);
+                break;
+            default:
+                throw new SyntaxException();
         }
     }
 
@@ -142,7 +149,7 @@ public class FileParser {
                     findEndOfFunction();
                 }
                 if(currentLineInfo.getType() == MatcherWrapper.FUNCTION_DECLARATION){
-                    throw new SyntaxException();//TODO new exception-same as the one we need to add in line 91
+                    throw new SyntaxException();//TODO new exception-same as the one we need to add in 5 lines
                 }
             }
             //if we got here - there was an illegal functionality

@@ -8,13 +8,13 @@ public class InternalScope extends Scope{
         this.parentScope = parentScope;
     }//TODO
 
-    public Var containsVar(String name){
+    public Var containsRecorsive(String name){
         return containsHelper(this, name);
     }
 
     private Var containsHelper(Scope scope, String searchVal){
         if(scope.getParentScope() == null){ //if this is the global
-            return scope.containsVar(searchVal);
+            return scope.containsInScope(searchVal);
         }
         for (Var v : getVars()){
             if(v.getVarName().equals(searchVal)){

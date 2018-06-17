@@ -6,20 +6,19 @@ import java.util.ArrayList;
 
 public class GlobalScope extends Scope{
 
-    ArrayList<LineInfo> functionsSignature;
+    private ArrayList<FunctionSignature> functionsSignature;
 
     public GlobalScope(){
         this.parentScope = null;
+        functionsSignature = new ArrayList<>();
     }
 
-    public Var containsVar(String name){
-        for (Var v : getVars()){
-            if(v.getVarName().equals(name)){
-                return v;
-            }
-        }
-        return null;
+    public void addFunctionDeclaration(LineInfo funcDeclaration){
+        FunctionSignature func = new FunctionSignature(funcDeclaration);
     }
 
-
+    @Override
+    public Var containsRecorsive(String name) {
+        return super.containsInScope(name);
+    }
 }
