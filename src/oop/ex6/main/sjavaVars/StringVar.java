@@ -19,8 +19,10 @@ public class StringVar extends Var{
         this.isFinal = isFinal;
         this.varName = name;
         if(!isInitialized){return;}
-        setValue(value);
-
+        // don't care for value in case it comes from function deceleration (value is not known).
+        if (value != null){
+            setValue(value);
+        }
     }
 
     @Override

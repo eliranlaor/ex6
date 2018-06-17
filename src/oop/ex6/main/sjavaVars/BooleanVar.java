@@ -1,6 +1,5 @@
 package oop.ex6.main.sjavaVars;
 
-import oop.ex6.main.InitializationException;
 import oop.ex6.main.Regexes;
 import oop.ex6.main.SyntaxException;
 
@@ -15,29 +14,36 @@ public class BooleanVar extends Var{
     private boolean value;
     private String name;
 
-    private static final String TRUE = "true";
-    private static final String FALSE = "false";
 
-
+    /**
+     *
+     * @param isInitialized
+     * @param isFinal
+     * @param name
+     * @param value
+     * @throws SyntaxException
+     */
     public BooleanVar(boolean isInitialized, boolean isFinal, String name, String value)
             throws SyntaxException {
         this.isInitialized = isInitialized;
         this.isFinal = isFinal;
         this.name = name;
         if(!isInitialized){return;}
-        setValue(value);
-    }
+        // don't care for value in case it comes from function deceleration (value is not known).
+        if (value != null){
+            setValue(value);
+        }    }
 
     @Override
     public void setValue(String value) throws SyntaxException {
         Pattern pattern = Pattern.compile(Regexes.DOUBLE_REGEX);
-        if (!(pattern.matcher(value).matches() || (value.equals(FALSE) ||
-                value.equals(TRUE)))) {
+        if (!(pattern.matcher(value).matches() || (value.equals(Regexes.FALSE) ||
+                value.equals(Regexes.TRUE)))) {
             throw new SyntaxException();
         }
         this.value = (pattern.matcher(value).matches()) ?
                 (Integer.parseInt(pattern.matcher(value).group()) != 0) :
-                (value.equals(TRUE)) ? true : false;
+                (value.equals(Regexes.TRUE)) ? true : false;
         this.isInitialized = true;
     }
 

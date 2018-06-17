@@ -1,6 +1,5 @@
 package oop.ex6.main.sjavaVars;
 
-import oop.ex6.main.InitializationException;
 import oop.ex6.main.SyntaxException;
 
 public class IntVar extends Var{
@@ -8,13 +7,24 @@ public class IntVar extends Var{
     private int value;
     private String name;
 
+    /**
+     *
+     * @param isInitialized
+     * @param isFinal
+     * @param name
+     * @param value
+     * @throws SyntaxException
+     */
     public IntVar(boolean isInitialized, boolean isFinal, String name, String value) throws
             SyntaxException {
         this.isInitialized = isInitialized;
         this.isFinal = isFinal;
         this.varName = name;
         if(!isInitialized){return;}
-        setValue(value);
+        // don't care for value in case it comes from function deceleration (value is not known).
+        if (value != null){
+            setValue(value);
+        }
 
     }
 
