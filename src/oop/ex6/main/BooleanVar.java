@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class BooleanVar {
 
 
-]    private Matcher matcher;
+    private Matcher matcher;
 
     private boolean value;
     private String name;
