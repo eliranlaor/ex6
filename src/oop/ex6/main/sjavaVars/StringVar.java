@@ -1,12 +1,17 @@
 package oop.ex6.main.sjavaVars;
 
-public class StringVar {
+public class StringVar extends Var{
 
     private String value;
-    private String name;
 
-    public StringVar(String value, String name){
+    public StringVar(boolean isInitialized, boolean isFinal, String name, String value){
+        this.isInitialized = isInitialized;
+        this.isFinal = isFinal;
+        this.varName = name;
+        if(!isInitialized){return;}
         this.value = value;
-        this.name = name;
+        //TODO - check value validity
     }
+
+
 }

@@ -10,9 +10,7 @@ public abstract class Scope {
 
 
     public Scope(){} //TODO
-    public Scope(Scope parent){
 
-    }
 
     public Scope getParentScope() {
         return parentScope;
@@ -27,5 +25,6 @@ public abstract class Scope {
         this.vars.add(var);
     }
 
+    public Var containsVar(String name){return null;}
 
 }

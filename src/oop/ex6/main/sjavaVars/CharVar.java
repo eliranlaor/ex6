@@ -1,12 +1,16 @@
 package oop.ex6.main.sjavaVars;
 
-public class CharVar {
+public class CharVar extends Var{
 
     private String value;
-    private String name;
 
-    public CharVar(String value, String name){
+    public CharVar(boolean isInitialized, boolean isFinal, String name, String value){
         this.value = value;
-        this.name = name;
+        this.isInitialized = isInitialized;
+        this.varType = varType;
+        this.isFinal = isFinal;
+        this.varName = name;
+        if(!isInitialized){return;}
+        this.value = value; //TODO check value validity
     }
 }

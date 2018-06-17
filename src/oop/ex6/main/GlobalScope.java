@@ -9,7 +9,7 @@ public class GlobalScope extends Scope{
     ArrayList<LineInfo> functionsSignature;
 
     public GlobalScope(){
-
+        this.parentScope = null;
     }
 
     public Var containsVar(String name){

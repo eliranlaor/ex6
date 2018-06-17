@@ -11,17 +11,13 @@ public abstract class Var{
     /*magic numbers - end*/
 
     /*object parameters*/
-    private boolean isInitialized;
-    private int varType;
-    private boolean isFinal;
-    private String varName;
+    protected boolean isInitialized;
+    protected int varType;
+    protected boolean isFinal;
+    protected String varName;
     /*object parameters - end*/
 
-    public Var(boolean isInitialized, int varType, boolean isFinal, String name){
-        this.isInitialized = isInitialized;
-        this.varType = varType;
-        this.isFinal = isFinal;
-        this.varName = name;
+    public Var(){
     }
 
     public String getVarName() {

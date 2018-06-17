@@ -7,16 +7,10 @@ public class TestBitches {
 
     public static void main(String[] args){
 
-        String javaTypes = "int|double|boolean|String|char";
-        String varName = "_\\w+|[a-zA-Z]\\w*";
-        String argument = "(int|double|boolean|String|char) +(_\\w+|[a-zA-Z]\\w*)";
-        Pattern pattern = Pattern.compile(" *(final )? *(int|double|boolean|String|char) +" +
-                "(_\\w+|[a-zA-Z]\\w*) *; *");
-        Matcher matcher = pattern.matcher("final int a;");
-        System.out.println(matcher.matches());
-        for(int i = 1; i <= matcher.groupCount(); i++){
-            System.out.println(matcher.group(i));
-        }
+        GlobalScope a = new GlobalScope();
+        InternalScope b = new InternalScope(a);
+        GlobalScope c = new GlobalScope();
+        System.out.println(b.getClass().isInstance(a));
     }
 
 }

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  *
  */
-public class BooleanVar {
+public class BooleanVar extends Var{
 
 
     private boolean value;
@@ -19,8 +19,13 @@ public class BooleanVar {
     private static final String FALSE = "false";
 
 
-    public BooleanVar(String value, String name) throws InitializationException {
+    public BooleanVar(boolean isInitialized, boolean isFinal, String name, String value)
+            throws InitializationException {
         try {
+            this.isInitialized = isInitialized;
+            this.isFinal = isFinal;
+            this.name = name;
+            if(!isInitialized){return;}
             Pattern pattern = Pattern.compile(DOUBLE_REGEX);
             if (!(pattern.matcher(value).matches() || (value.equals(FALSE) || value.equals(TRUE)))){
                 throw new InitializationException();
@@ -28,7 +33,6 @@ public class BooleanVar {
             this.value = (pattern.matcher(value).matches()) ?
                     (Integer.parseInt(pattern.matcher(value).group()) != 0) :
                     (value.equals(TRUE)) ? true : false;
-            this.name = name;
         }
         catch (Exception e) {
             throw new InitializationException();
