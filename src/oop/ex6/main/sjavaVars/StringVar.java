@@ -12,12 +12,14 @@ public class StringVar extends Var{
     private final static String APOSTROPHES = "\"";
 
 
+
     public StringVar(boolean isInitialized, boolean isFinal, String name, String value) throws
             SyntaxException{
         this.isInitialized = isInitialized;
         this.isFinal = isFinal;
         this.varName = name;
         if(!isInitialized){return;}
+        setValue(value);
 
     }
 
@@ -28,7 +30,14 @@ public class StringVar extends Var{
             throw new SyntaxException();
         }
         this.value = value.replace(APOSTROPHES,EMPTY_STRING);
+        this.isInitialized = true;
     }
 
-    public getVarType
+    /**
+     *
+     * @return
+     */
+    public int getVarType(){
+        return Var.STRING_INDEX;
+    }
 }

@@ -28,8 +28,11 @@ public class Regexes {
             "(" + FUNCTION_ARG + "?|" + "(" + FUNCTION_ARG + SPACES + COMMA + SPACES + ")*" + FUNCTION_ARG +
                     ")";
 
+    private final static String VAR_NAME_VALUE = "(" + VAR_NAME + "|[^\\n\\r]*)";
+
     private static final String VAR_COMMAS =
-            "(" + VAR_NAME + ")?|" + "(" + VAR_NAME + SPACES + COMMA + SPACES + ")*" + VAR_NAME + ")";
+            "(" + VAR_NAME_VALUE + ")?|" + "(" + VAR_NAME_VALUE + SPACES + COMMA + SPACES + ")*"
+                    + VAR_NAME_VALUE + ")";
 
     public static final String DOUBLE_REGEX = "-?\\d+([.]\\d+)?";
     private static final String CONDITION = "(" + TRUE + "|" + FALSE + "|" + DOUBLE_REGEX + ")";
@@ -38,6 +41,8 @@ public class Regexes {
     public static final String CHAR_REGEX = "\'.\'";
     public static final String STRING_REGEX = "\"" + VAR_VALUE + "\"";
 
+    private final static String COMMENT = "//[^\\n\\r]*";
+
 
 
 
@@ -45,11 +50,13 @@ public class Regexes {
             SPACES + "(" + FINAL + ")?" + SPACES + VAR_TYPE + SPACES_PLUS + VAR_NAME_COMMAS + SPACES +
                     SEMICOLON + SPACES;
 
+    public final static String ASSIGNMENT =
+            SPACES + "(" + VAR_NAME + ")" + SPACES + EQUAL + SPACES + VAR_NAME_VALUE + SPACES + SEMICOLON
+                    + SPACES;
+
     public final static String RETURN_REGEX = SPACES + RETURN + SPACES + SEMICOLON + SPACES;
 
-    public final static String COMMENT = "//[^\\n\\r]*";
-
-    public final static String EMPTY_LINE = SPACES;
+    public final static String EMPTY_LINE_COMMENT = "(" + SPACES + "|" + COMMENT + ")";
 
     public final static String CLOSING_CURLY_BRACKETS = SPACES + "}" + SPACES;
 
