@@ -98,6 +98,12 @@ public class FileParser {
             LineInfo currentLineInfo;
             while(currentLine != null){
                 currentLineInfo = matcherWrapper.match(currentLine);
+                if(currentLineInfo.getType() == MatcherWrapper.END_SCOPE){
+                    return;
+                }
+                updateInternalScope(currentLineInfo);
+
+
                 currentLine = buffer.readLine();
             }
         }
@@ -108,4 +114,23 @@ public class FileParser {
             //TODO
         }
     }
+
+    private void updateInternalScope(LineInfo currentLineInfo) { //TODO
+
+        switch(currentLineInfo.getType()){
+            case MatcherWrapper.REGEX_1:
+                break;
+            case MatcherWrapper.REGEX_2:
+                break;
+            case MatcherWrapper.REGEX_3:
+                break;
+        }
+    }
+
+
+
+
 }
+
+
+
