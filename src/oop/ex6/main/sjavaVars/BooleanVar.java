@@ -5,10 +5,11 @@ import oop.ex6.main.InitializationException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ *
+ */
 public class BooleanVar {
 
-
-    private Matcher matcher;
 
     private boolean value;
     private String name;

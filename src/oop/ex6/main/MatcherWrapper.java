@@ -45,6 +45,7 @@ public class MatcherWrapper {
     public LineInfo match(String line) throws SyntaxException{
         for (int i = 0; i < REGEXES.length; i++) {
             if (patterns[i].matcher(line).matches()){
+                matcher = patterns[i].matcher(line);
                 String[] lineInfoArgs = new String[matcher.groupCount()];
                 for (int j = 1; j <= matcher.groupCount(); j++) {
                     lineInfoArgs[j] = matcher.group(j);
