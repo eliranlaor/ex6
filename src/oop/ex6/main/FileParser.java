@@ -1,5 +1,8 @@
 package oop.ex6.main;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import org.omg.CORBA.MARSHAL;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,23 +12,28 @@ public class FileParser {
     private Reader inFile;
     private BufferedReader buffer;
     private MatcherWrapper matcherWrapper;
-
+    private String fileToParse;
 
     public FileParser(String sJavacFileName) throws IOException{
-        try {
-            inFile = new FileReader(sJavacFileName);
-            buffer = new BufferedReader(inFile);
-            matcherWrapper = new MatcherWrapper();
-        }
-        catch(IOException e){
-            //TODO check if we need to print err message
-            throw e;
-        }
+        fileToParse = sJavacFileName;
+        resetFileBuffer();
+        matcherWrapper = new MatcherWrapper();
+
     }
 
+
+    private void resetFileBuffer(){
+        try {
+            inFile = new FileReader(fileToParse);
+            buffer = new BufferedReader(inFile);
+        }
+        catch (IOException e){
+            //TODO
+        }
+    }
     public void parse(){
         GlobalScope global = firstParse();
-        //TODO reset reader
+        resetFileBuffer();
         secondParse(global);
     }
 
@@ -33,28 +41,27 @@ public class FileParser {
 
     private GlobalScope firstParse(){
         try{
+            GlobalScope globalScope = new GlobalScope();
             LineInfo currentLineInfo;
             String currentLine = buffer.readLine();
             while(currentLine != null) {
                 currentLineInfo = matcherWrapper.match(currentLine);
-                updateGlobalScope(currentLineInfo); //TODO
+                updateGlobalScope(globalScope, currentLineInfo); //TODO
                 currentLine = buffer.readLine();
             }
+
+
+            return globalScope;
         }
         catch(IOException e){ //TODO complete this functionality
-
+            return null;
         }
         catch(SyntaxException e){
-
+            return null;
         }
-
-
-
-
-        return null;
     }
 
-    private void updateGlobalScope(LineInfo currentLineInfo) { //TODO
+    private void updateGlobalScope(GlobalScope global, LineInfo currentLineInfo) { //TODO
 
         //if we encounter if/while blocks - we need to throw an exception
 
@@ -69,6 +76,32 @@ public class FileParser {
         }
     }
 
+    private void findEndOfFunction() throws SyntaxException{
+        try {
+            String currentLine = buffer.readLine();
+            LineInfo currentLineInfo;
+            while(currentLine != null){
+                currentLineInfo = matcherWrapper.match(currentLine);
+                if(currentLineInfo.getType() == MatcherWrapper.END_SCOPE){
+                    return;
+                }
+                if(currentLineInfo.getType() == MatcherWrapper.IF_WHILE_DECLARATION){
+                    findEndOfFunction();
+                }
+                if(currentLineInfo.getType() == MatcherWrapper.FUNCTION_DECLARATION){
+                    throw new SyntaxException();//TODO new exception-same as the one we need to add in line 91
+                }
+            }
+            //if we got here - there was an illegal functionality
+            throw new SyntaxException();//TODO new exception
+        }
+        catch(IOException e){
+            //TODO
+        }
+        catch (SyntaxException e){
+
+        }
+    }
 
     private void secondParse(Scope currentScope){
         try {
@@ -128,8 +161,7 @@ public class FileParser {
     }
 
 
-
-
+    
 }
 
 
