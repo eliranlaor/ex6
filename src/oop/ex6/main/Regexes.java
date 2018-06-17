@@ -38,6 +38,8 @@ public class Regexes {
     public static final String CHAR_REGEX = "\'.\'";
     public static final String STRING_REGEX = "\"" + VAR_VALUE + "\"";
 
+    private final static String COMMENT = "//[^\\n\\r]*";
+
 
 
 
@@ -47,9 +49,7 @@ public class Regexes {
 
     public final static String RETURN_REGEX = SPACES + RETURN + SPACES + SEMICOLON + SPACES;
 
-    public final static String COMMENT = "//[^\\n\\r]*";
-
-    public final static String EMPTY_LINE = SPACES;
+    public final static String EMPTY_LINE_COMMENT = "(" + SPACES + "|" + COMMENT + ")";
 
     public final static String CLOSING_CURLY_BRACKETS = SPACES + "}" + SPACES;
 
@@ -64,4 +64,5 @@ public class Regexes {
     public final static String IF_WHILE =
             SPACES + "(" + IF + "|" + WHILE + ")" + CONDITION + SPACES + OPEN_CURLY_BRACKETS + SPACES;
 
+    //TODO - assignment regex
 }

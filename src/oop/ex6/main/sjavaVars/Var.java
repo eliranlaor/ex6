@@ -5,11 +5,11 @@ import oop.ex6.main.SyntaxException;
 public abstract class Var{
 
     /*magic numbers*/
-    private final int INT_INDEX = 0;
-    private final int DOUBLE_INDEX = 1;
-    private final int BOOLEAN_INDEX = 2;
-    private final int STRING_INDEX = 3;
-    private final int CHAR_INDEX = 4;
+    static final int INT_INDEX = 0;
+    static final int DOUBLE_INDEX = 1;
+    static final int BOOLEAN_INDEX = 2;
+    static final int STRING_INDEX = 3;
+    static final int CHAR_INDEX = 4;
     /*magic numbers - end*/
 
     /*object parameters*/
@@ -44,8 +44,21 @@ public abstract class Var{
 
     public void setValue(String value) throws SyntaxException{}
 
+    /**
+     *
+     * @param firstType
+     * @param secondType
+     * @return
+     */
     public boolean areTypesMatch(int firstType, int secondType){
-
+        switch (firstType){
+            case DOUBLE_INDEX:
+                return (secondType==INT_INDEX || secondType==DOUBLE_INDEX);
+            case BOOLEAN_INDEX:
+                return (secondType==INT_INDEX || secondType==DOUBLE_INDEX || secondType==BOOLEAN_INDEX);
+            default:
+                return (firstType==secondType);
+        }
     }
 
 }

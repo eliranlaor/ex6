@@ -12,12 +12,11 @@ public class CharVar extends Var{
 
     public CharVar(boolean isInitialized, boolean isFinal, String name, String value) throws
             SyntaxException{
-        setValue(value);
         this.isInitialized = isInitialized;
-        this.varType = varType;
         this.isFinal = isFinal;
         this.varName = name;
         if(!isInitialized){return;}
+        setValue(value);
     }
 
     @Override
@@ -27,5 +26,14 @@ public class CharVar extends Var{
             throw new SyntaxException();
         }
         this.value = value.charAt(1);
+        this.isInitialized = true;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getVarType(){
+        return Var.CHAR_INDEX;
     }
 }
