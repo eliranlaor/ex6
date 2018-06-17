@@ -23,10 +23,6 @@ public class VarFactory {
             }
             return null;
         }
-        catch(InitializationException e){
-            return null;
-            //TODO - handle exception
-        }
         catch(SyntaxException e){
             return null;
         }
