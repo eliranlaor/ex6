@@ -128,7 +128,7 @@ public class FileParser {
             case Regexes.EMPTY_LINE_COMMENT:
                 //need to ignore :)
                 break;
-            case Regexes.FUNCTION_DECLERATION:
+            case Regexes.FUNCTION_DECELERATION:
                 global.addFunctionDeclaration(currentLineInfo);
                 break;
             default:
