@@ -28,8 +28,11 @@ public class Regexes {
             "(" + FUNCTION_ARG + "?|" + "(" + FUNCTION_ARG + SPACES + COMMA + SPACES + ")*" + FUNCTION_ARG +
                     ")";
 
+    private final static String VAR_NAME_VALUE = "(" + VAR_NAME + "|[^\\n\\r]*)";
+
     private static final String VAR_COMMAS =
-            "(" + VAR_NAME + ")?|" + "(" + VAR_NAME + SPACES + COMMA + SPACES + ")*" + VAR_NAME + ")";
+            "(" + VAR_NAME_VALUE + ")?|" + "(" + VAR_NAME_VALUE + SPACES + COMMA + SPACES + ")*"
+                    + VAR_NAME_VALUE + ")";
 
     public static final String DOUBLE_REGEX = "-?\\d+([.]\\d+)?";
     private static final String CONDITION = "(" + TRUE + "|" + FALSE + "|" + DOUBLE_REGEX + ")";
@@ -46,6 +49,10 @@ public class Regexes {
     public final static String VAR_DECLERATION =
             SPACES + "(" + FINAL + ")?" + SPACES + VAR_TYPE + SPACES_PLUS + VAR_NAME_COMMAS + SPACES +
                     SEMICOLON + SPACES;
+
+    public final static String ASSIGNMENT =
+            SPACES + "(" + VAR_NAME + ")" + SPACES + EQUAL + SPACES + VAR_NAME_VALUE + SPACES + SEMICOLON
+                    + SPACES;
 
     public final static String RETURN_REGEX = SPACES + RETURN + SPACES + SEMICOLON + SPACES;
 
@@ -64,5 +71,4 @@ public class Regexes {
     public final static String IF_WHILE =
             SPACES + "(" + IF + "|" + WHILE + ")" + CONDITION + SPACES + OPEN_CURLY_BRACKETS + SPACES;
 
-    //TODO - assignment regex
 }
