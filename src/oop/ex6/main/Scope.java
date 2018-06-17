@@ -1,5 +1,7 @@
 package oop.ex6.main;
 
+import oop.ex6.main.sjavaVars.Var;
+
 import java.util.ArrayList;
 
 public abstract class Scope {
