@@ -69,6 +69,7 @@ public class FileParser {
         String[] args = currentLineInfo.getArgs();
         boolean isFinal = false;
         boolean isInitialized;
+        Var newVar;
         String varType;
         switch(currentLineInfo.getType()){
             case MatcherWrapper.REGEX_1:
@@ -83,7 +84,6 @@ public class FileParser {
                 String[] varNames = args[index].replaceAll(" ", "").split(",");
                 //varName will contain "NAME=VALUE" or "NAME"
                 for(int i = index; i < args.length; i++){
-                    Var newVar;
                     String[] tempString = args[i].split("=");
                     if(global.containsVar(tempString[0]) != null){
                         //TODO throw exception - trying to initial an already existing var
@@ -104,14 +104,25 @@ public class FileParser {
                 if(var == null){
                     //TODO - need to throw an exception
                 }
-                if(var.isFinal()){
+                if(var.isFinal() && var.isInitialized()){
                     //TODO - need to throw an exception
                 }
                 String value = args[1].trim();
-                if(value.startsWith("\\") &&)
+                Var secondVar = global.containsVar(value);
+                if(secondVar != null){
+                    if(secondVar.isInitialized()) {
 
-
-
+                        var.setInitialized();
+                    }
+                    else{
+                        //TODO - need to throw an exception - usage of uninitialized variable
+                    }
+                }
+                else{
+                    //second var isn't a variable
+                    var.setValue(value); // check validity of value
+                    var.setInitialized();
+                }
                 break;
             case MatcherWrapper.REGEX_3:
                 break;
