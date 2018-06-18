@@ -24,13 +24,13 @@ public class Regexes {
     private static final String VAR_COMMAS =
             "(" + VAR_NAME_VALUE + ")?|" + "(" + VAR_NAME_VALUE + SPACES + COMMA + SPACES + ")*"
                     + VAR_NAME_VALUE + ")";
-
     private static final String FUNCTION_NAME = "([a-zA-Z]\\w*)";
     private static final String FUNCTION_ARG = "(" + "(" + FINAL + ")?" + VAR_TYPE + SPACES_PLUS + VAR_NAME
             + ")";
     private static final String FUNCTION_ARGS =
             "(" + FUNCTION_ARG + "?|" + "(" + FUNCTION_ARG + SPACES + COMMA + SPACES + ")*" + FUNCTION_ARG +
                     ")";
+    private final static String COMMENT = "//[^\\n\\r]*";
 
 
     /* Regexes for Vars Checks */
@@ -41,9 +41,9 @@ public class Regexes {
     public static final String STRING_REGEX = "\"" + VAR_VALUE + "\"";
     /* Regexes for Vars Checks - end*/
 
-    private final static String COMMENT = "//[^\\n\\r]*";
 
-    private static final String CONDITION = "(" + TRUE + "|" + FALSE + "|" + DOUBLE_REGEX + ")";
+    private static final String CONDITION =
+            "(" + TRUE + "|" + FALSE + "|" + DOUBLE_REGEX + "|" + VAR_NAME + ")";
 
 
     /* Regexes for MatcherWrapper */
