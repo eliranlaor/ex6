@@ -159,13 +159,13 @@ public class FileParser {
             LineInfo currentLineInfo;
             while(currentLine != null){
                 currentLineInfo = matcherWrapper.match(currentLine);
-                if(currentLineInfo.getType() == MatcherWrapper.END_SCOPE){
+                if(currentLineInfo.getType() == Regexes.CLOSING_CURLY_BRACKETS){
                     return;
                 }
-                if(currentLineInfo.getType() == MatcherWrapper.IF_WHILE_DECLARATION){
+                if(currentLineInfo.getType() == Regexes.IF_WHILE){
                     findEndOfFunction();
                 }
-                if(currentLineInfo.getType() == MatcherWrapper.FUNCTION_DECLARATION){
+                if(currentLineInfo.getType() == Regexes.FUNCTION_DECELERATION){
                     throw new SyntaxException();//TODO new exception-same as the one we need to add in 5 lines
                 }
             }
@@ -186,7 +186,7 @@ public class FileParser {
             LineInfo currentLineInfo;
             while(currentLine != null) {
                 currentLineInfo = matcherWrapper.match(currentLine);
-                if (currentLineInfo.getType() == MatcherWrapper.FUNCTION_DECLARATION) {
+                if (currentLineInfo.getType() == Regexes.FUNCTION_DECELERATION) {
                     Scope newScope = new InternalScope(currentScope);
                     String funcName = currentLineInfo.getArgs()[0];
                     FunctionSignature currentFunction = globalScope.getFunction(funcName);
@@ -211,7 +211,7 @@ public class FileParser {
             LineInfo currentLineInfo;
             while(currentLine != null){
                 currentLineInfo = matcherWrapper.match(currentLine);
-                if(currentLineInfo.getType() == MatcherWrapper.END_SCOPE){
+                if(currentLineInfo.getType() == Regexes.CLOSING_CURLY_BRACKETS){
                     return;
                 }
                 updateInternalScope(currentLineInfo, currentScope);
@@ -229,33 +229,37 @@ public class FileParser {
     }
 
     private void updateInternalScope(LineInfo currentLineInfo, Scope curScope) { //TODO
-        returnFlag = false;
-        switch(currentLineInfo.getType()){
-            case Regexes.IF_WHILE:
-                if(checkBooleanCondition(currentLineInfo, curScope)){
-                    InternalScope newScope = new InternalScope(curScope);
-                    parseScope(newScope);
-                }
-                else{
-                    //TODO - throw an exception
-                }
-                break;
-            case Regexes.FUNCTION_CALL:
-                if(!checkFunctionCall(currentLineInfo, curScope)){
-                    //TODO throw an exception
-                }
-                break;
-            case Regexes.EMPTY_LINE_COMMENT:
-                break;
-            case Regexes.RETURN_REGEX:
-                returnFlag = true;
-                break;
-            case Regexes.ASSIGNMENT:
-                assigment(currentLineInfo, curScope);
-                break;
-            case Regexes.VAR_DECELERATION:
-                varDeclaration(currentLineInfo, curScope);
-                break;
+        try {
+            returnFlag = false;
+            switch (currentLineInfo.getType()) {
+                case Regexes.IF_WHILE:
+                    if (checkBooleanCondition(currentLineInfo, curScope)) {
+                        InternalScope newScope = new InternalScope(curScope);
+                        parseScope(newScope);
+                    } else {
+                        //TODO - throw an exception
+                    }
+                    break;
+                case Regexes.FUNCTION_CALL:
+                    if (!checkFunctionCall(currentLineInfo, curScope)) {
+                        //TODO throw an exception
+                    }
+                    break;
+                case Regexes.EMPTY_LINE_COMMENT:
+                    break;
+                case Regexes.RETURN_REGEX:
+                    returnFlag = true;
+                    break;
+                case Regexes.ASSIGNMENT:
+                    assigment(currentLineInfo, curScope);
+                    break;
+                case Regexes.VAR_DECELERATION:
+                    varDeclaration(currentLineInfo, curScope);
+                    break;
+            }
+        }
+        catch(SyntaxException e){
+            //TODO - handle exception
         }
     }
 
