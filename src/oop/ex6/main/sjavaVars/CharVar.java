@@ -1,15 +1,26 @@
 package oop.ex6.main.sjavaVars;
 
-import oop.ex6.main.InitializationException;
 import oop.ex6.main.Regexes;
 import oop.ex6.main.SyntaxException;
 
 import java.util.regex.Pattern;
 
+/**
+ * represents a Var of type Char
+ */
 public class CharVar extends Var{
 
+    /* */
     private char value;
 
+    /**
+     *
+     * @param isInitialized
+     * @param isFinal
+     * @param name
+     * @param value
+     * @throws SyntaxException
+     */
     public CharVar(boolean isInitialized, boolean isFinal, String name, String value) throws
             SyntaxException{
         this.isInitialized = isInitialized;

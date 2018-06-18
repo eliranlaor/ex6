@@ -2,6 +2,9 @@ package oop.ex6.main.sjavaVars;
 
 import oop.ex6.main.SyntaxException;
 
+/**
+ * represents a Var of type Int
+ */
 public class IntVar extends Var{
 
     private int value;

@@ -1,7 +1,7 @@
 package oop.ex6.main;
 
 /**
- *
+ * class that holds all the regexes that are required to parse a Javac code
  */
 public class Regexes {
 

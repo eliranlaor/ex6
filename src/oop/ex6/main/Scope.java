@@ -4,27 +4,58 @@ import oop.ex6.main.sjavaVars.Var;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public abstract class Scope {
+
     protected Scope parentScope;
     private ArrayList<Var> vars;
 
-
+    /**
+     *
+     */
     public Scope(){} //TODO
 
-
+    /**
+     *
+     * @return
+     */
     public Scope getParentScope() {
         return parentScope;
     }
 
-
+    /**
+     *
+     * @return
+     */
     public ArrayList<Var> getVars() {
         return vars;
     }
 
+    /**
+     *
+     * @param var
+     */
     public void addVar(Var var) {
         this.vars.add(var);
     }
 
+    /**
+     *
+     * @param vars
+     */
+    public void addVar(ArrayList<Var> vars){
+        for (Var var:vars) {
+            addVar(var);
+        }
+    }
+
+    /**
+     *
+     * @param name
+     * @return
+     */
     public Var containsInScope(String name){
         for (Var v : getVars()){
             if(v.getVarName().equals(name)){
@@ -34,6 +65,11 @@ public abstract class Scope {
         return null;
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     public Var containsRecorsive(String name){return null;}
 
 }

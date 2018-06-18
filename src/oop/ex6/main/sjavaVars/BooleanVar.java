@@ -6,7 +6,7 @@ import oop.ex6.main.SyntaxException;
 import java.util.regex.Pattern;
 
 /**
- *
+ * represents a Var of type Boolean
  */
 public class BooleanVar extends Var{
 
@@ -37,6 +37,7 @@ public class BooleanVar extends Var{
     @Override
     public void setValue(String value) throws SyntaxException {
         Pattern pattern = Pattern.compile(Regexes.DOUBLE_REGEX);
+        // only allowed types into a boolean var
         if (!(pattern.matcher(value).matches() || (value.equals(Regexes.FALSE) ||
                 value.equals(Regexes.TRUE)))) {
             throw new SyntaxException();
