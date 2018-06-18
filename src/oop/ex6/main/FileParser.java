@@ -13,6 +13,7 @@ public class FileParser {
     private MatcherWrapper matcherWrapper;
     private String fileToParse;
     private VarFactory varFactory;
+    private GlobalScope globalScope;
 
     public FileParser(String sJavacFileName) throws IOException{
         fileToParse = sJavacFileName;
@@ -32,9 +33,9 @@ public class FileParser {
         }
     }
     public void parse(){
-        GlobalScope global = firstParse();
+        globalScope = firstParse();
         resetFileBuffer();
-        secondParse(global);
+        secondParse(globalScope);
     }
 
 
@@ -72,7 +73,7 @@ public class FileParser {
         Var newVar;
         String varType;
         switch(currentLineInfo.getType()){
-            case MatcherWrapper.REGEX_1:
+            case Regexes.VAR_DECELERATION:
                 //variable declaration
                 int index = 0;
                 if(args[index] == "final"){
@@ -98,7 +99,7 @@ public class FileParser {
                     global.addVar(newVar);
                 }
                 break;
-            case MatcherWrapper.REGEX_2:
+            case Regexes.ASSIGNMENT:
                 //variable initialization
                 Var var = global.containsRecorsive(args[0]);
                 if(var == null){
@@ -130,6 +131,7 @@ public class FileParser {
                 break;
             case Regexes.FUNCTION_DECELERATION:
                 global.addFunctionDeclaration(currentLineInfo);
+                findEndOfFunction();
                 break;
             default:
                 throw new SyntaxException();
@@ -171,6 +173,9 @@ public class FileParser {
                 currentLineInfo = matcherWrapper.match(currentLine);
                 if (currentLineInfo.getType() == MatcherWrapper.FUNCTION_DECLARATION) {
                     Scope newScope = new InternalScope(currentScope);
+                    String funcName = currentLineInfo.getArgs()[0];
+                    FunctionSignature currentFunction = globalScope.getFunction(funcName);
+                    newScope.addVar(currentFunction.getVars());
                     parseScope(newScope);
                 }
                 currentLine = buffer.readLine();

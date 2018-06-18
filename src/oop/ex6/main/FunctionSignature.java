@@ -41,4 +41,12 @@ public class FunctionSignature {
             vars.add(newVar);
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Var> getVars() {
+        return vars;
+    }
 }
