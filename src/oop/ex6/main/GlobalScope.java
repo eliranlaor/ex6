@@ -21,4 +21,14 @@ public class GlobalScope extends Scope{
     public Var containsRecorsive(String name) {
         return super.containsInScope(name);
     }
+
+    public FunctionSignature getFunction(String name){
+        for(FunctionSignature f : functionsSignature){
+            if(f.getName().equals(name)){
+                return f;
+            }
+        }
+        return null;
+    }
+
 }
