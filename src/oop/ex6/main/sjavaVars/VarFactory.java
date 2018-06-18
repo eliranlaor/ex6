@@ -3,6 +3,9 @@ package oop.ex6.main.sjavaVars;
 import oop.ex6.main.InitializationException;
 import oop.ex6.main.SyntaxException;
 
+/**
+ * factory for vars. creates var object by
+ */
 public class VarFactory {
     public VarFactory(){
     }

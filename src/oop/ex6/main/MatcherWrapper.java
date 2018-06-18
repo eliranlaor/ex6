@@ -8,50 +8,38 @@ import java.util.regex.Pattern;
  */
 public class MatcherWrapper {
 
-    /*  */
+    /* patterns for all the regexes */
     private Pattern[] patterns;
 
-    /*  */
+    /* a matcher for the regexes */
     private Matcher matcher;
 
-    /*  */
-    public static final String REGEX_1 = " *(final )? *(int|double|boolean|String|char) +" +
-            "(_\\w+|[a-zA-Z]\\w*);";
-    public static final String REGEX_2 =
-            " *(int|double|boolean|String|char) +(_\\w+|[a-zA-Z]\\w*) *= *([^\\n\\r]*) *; *";
-    public static final String REGEX_3 = " +(_\\w+|[a-zA-Z]\\w*) *= *([^\\n\\r]*) *; *";
-    public static final String END_SCOPE = " *} *";
-    public static final String RETURN = " *return *; *";
-    public static final String FUNCTION_DECLARATION = "6";
-    public static final String IF_WHILE_DECLARATION = "6";
-
-    public static final String[] REGEXES = {REGEX_1, REGEX_2, REGEX_3, END_SCOPE, RETURN, FUNCTION_DECLARATION};
 
     /**
-     *
+     * compiles all the regexes to the patterns
      */
     public MatcherWrapper(){
-        patterns = new Pattern[REGEXES.length];
-        for (int i = 0; i < REGEXES.length; i++) {
-            patterns[i] = Pattern.compile(REGEXES[i]);
+        patterns = new Pattern[Regexes.REGEXES.length];
+        for (int i = 0; i < Regexes.REGEXES.length; i++) {
+            patterns[i] = Pattern.compile(Regexes.REGEXES[i]);
         }
     }
 
     /**
-     *
-     * @param line
-     * @return
+     * matches a line of javac with regexes of valid lines.
+     * @param line - a string represents a line in Javac
+     * @return a LineInfo object which have the information of a valid Javac line
      * @throws SyntaxException
      */
     public LineInfo match(String line) throws SyntaxException{
-        for (int i = 0; i < REGEXES.length; i++) {
+        for (int i = 0; i < Regexes.REGEXES.length; i++) {
             if (patterns[i].matcher(line).matches()){
                 matcher = patterns[i].matcher(line);
                 String[] lineInfoArgs = new String[matcher.groupCount()];
                 for (int j = 1; j <= matcher.groupCount(); j++) {
                     lineInfoArgs[j] = matcher.group(j);
                 }
-                return new LineInfo(REGEXES[i], lineInfoArgs);
+                return new LineInfo(Regexes.REGEXES[i], lineInfoArgs);
             }
         }
         throw new SyntaxException();

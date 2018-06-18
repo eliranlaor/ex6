@@ -52,7 +52,7 @@ public class BooleanVar extends Var{
      *
      * @return
      */
-    public String  getVarType() {
+    public String getVarType() {
         return Var.BOOLEAN_INDEX;
     }
 

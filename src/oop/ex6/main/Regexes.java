@@ -73,6 +73,9 @@ public class Regexes {
     public final static String IF_WHILE =
             SPACES + "(" + IF + "|" + WHILE + ")" + CONDITION + SPACES + OPEN_CURLY_BRACKETS + SPACES;
 
+    public final static String[] REGEXES = {VAR_DECELERATION, ASSIGNMENT, RETURN_REGEX, EMPTY_LINE_COMMENT,
+            CLOSING_CURLY_BRACKETS, FUNCTION_DECELERATION, FUNCTION_CALL, IF_WHILE};
+
     /* Regexes for MatcherWrapper - end */
 
 }
