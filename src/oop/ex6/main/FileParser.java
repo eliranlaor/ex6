@@ -15,12 +15,14 @@ public class FileParser {
     private String fileToParse;
     private VarFactory varFactory;
     private GlobalScope globalScope;
+    private boolean returnFlag;
 
     public FileParser(String sJavacFileName) throws IOException{
         fileToParse = sJavacFileName;
         resetFileBuffer();
         matcherWrapper = new MatcherWrapper();
         varFactory = new VarFactory();
+        returnFlag = false;
     }
 
 
@@ -63,69 +65,81 @@ public class FileParser {
         }
     }
 
+
+
+    private void assigment(LineInfo lineInfo, Scope scope) throws SyntaxException{
+        String[] args = lineInfo.getArgs();
+        Var var = scope.containsRecorsive(args[0]);
+        if(var == null){
+            //TODO - need to throw an exception
+        }
+        if(var.isFinal() && var.isInitialized()){
+            //TODO - need to throw an exception
+        }
+        String value = args[1].trim();
+        Var secondVar = scope.containsRecorsive(value);
+        if(secondVar != null){
+            if(secondVar.isInitialized()) {
+                if(!var.areTypesMatch(var.getVarType(), secondVar.getVarType())){
+                    //TODO - throw exception
+                }
+                var.setInitialized();
+            }
+            else{
+                //TODO - need to throw an exception - usage of uninitialized variable
+            }
+        }
+        else{
+            //second var isn't a variable
+            var.setValue(value); // check validity of value
+        }
+    }
+
+
+    private void varDeclaration(LineInfo lineInfo, Scope scope){
+        String[] args = lineInfo.getArgs();
+        boolean isFinal = false;
+        Var newVar;
+        String varType;
+        int index = 0;
+        if(args[index] == "final"){
+            isFinal = true;
+            index++;
+        }
+        varType = args[index];
+        index++;
+        String[] varNames = args[index].replaceAll(" ", "").split(",");
+        //varName will contain "NAME=VALUE" or "NAME"
+        for(int i = 0; i < varNames.length; i++){
+            String[] tempString = varNames[i].split("=");
+            if(scope.containsInScope(tempString[0]) != null){
+                //TODO throw exception - trying to initial an already existing var
+            }
+            if(tempString.length > 1){ //declaring and initialing var
+                newVar = varFactory.creatVar(true, varType, isFinal, tempString[0],
+                        tempString[1]);
+            }
+            else{
+                newVar = varFactory.creatVar(false, varType, isFinal, args[i], null);
+            }
+            scope.addVar(newVar);
+        }
+    }
+
+
     private void updateGlobalScope(GlobalScope global, LineInfo currentLineInfo) throws SyntaxException{ //TODO
 
         //if we encounter if/while blocks - we need to throw an exception
 
         //when encountering function declaration, we need to update line buffer to the end of that function.
-        String[] args = currentLineInfo.getArgs();
-        boolean isFinal = false;
-        boolean isInitialized;
-        Var newVar;
-        String varType;
         switch(currentLineInfo.getType()){
             case Regexes.VAR_DECELERATION:
                 //variable declaration
-                int index = 0;
-                if(args[index] == "final"){
-                    isFinal = true;
-                    index++;
-                }
-                varType = args[index];
-                index++;
-                String[] varNames = args[index].replaceAll(" ", "").split(",");
-                //varName will contain "NAME=VALUE" or "NAME"
-                for(int i = 0; i < varNames.length; i++){
-                    String[] tempString = varNames[i].split("=");
-                    if(global.containsInScope(tempString[0]) != null){
-                        //TODO throw exception - trying to initial an already existing var
-                    }
-                    if(tempString.length > 1){ //declaring and initialing var
-                        newVar = varFactory.creatVar(true, varType, isFinal, tempString[0],
-                                tempString[1]);
-                    }
-                    else{
-                        newVar = varFactory.creatVar(false, varType, isFinal, args[i], null);
-                    }
-                    global.addVar(newVar);
-                }
-                break;
+                varDeclaration(currentLineInfo, global);
+               break;
             case Regexes.ASSIGNMENT:
                 //variable initialization
-                Var var = global.containsRecorsive(args[0]);
-                if(var == null){
-                    //TODO - need to throw an exception
-                }
-                if(var.isFinal() && var.isInitialized()){
-                    //TODO - need to throw an exception
-                }
-                String value = args[1].trim();
-                Var secondVar = global.containsRecorsive(value);
-                if(secondVar != null){
-                    if(secondVar.isInitialized()) {
-                        if(!var.areTypesMatch(var.getVarType(), secondVar.getVarType())){
-                            throw new SyntaxException();
-                        }
-                        var.setInitialized();
-                    }
-                    else{
-                        //TODO - need to throw an exception - usage of uninitialized variable
-                    }
-                }
-                else{
-                    //second var isn't a variable
-                    var.setValue(value); // check validity of value
-                }
+                assigment(currentLineInfo, globalScope);
                 break;
             case Regexes.EMPTY_LINE_COMMENT:
                 //need to ignore :)
@@ -215,7 +229,7 @@ public class FileParser {
     }
 
     private void updateInternalScope(LineInfo currentLineInfo, Scope curScope) { //TODO
-
+        returnFlag = false;
         switch(currentLineInfo.getType()){
             case Regexes.IF_WHILE:
                 if(checkBooleanCondition(currentLineInfo, curScope)){
@@ -227,9 +241,20 @@ public class FileParser {
                 }
                 break;
             case Regexes.FUNCTION_CALL:
-
+                if(!checkFunctionCall(currentLineInfo, curScope)){
+                    //TODO throw an exception
+                }
                 break;
-            case MatcherWrapper.REGEX_3:
+            case Regexes.EMPTY_LINE_COMMENT:
+                break;
+            case Regexes.RETURN_REGEX:
+                returnFlag = true;
+                break;
+            case Regexes.ASSIGNMENT:
+                assigment(currentLineInfo, curScope);
+                break;
+            case Regexes.VAR_DECELERATION:
+                varDeclaration(currentLineInfo, curScope);
                 break;
         }
     }
@@ -237,9 +262,9 @@ public class FileParser {
     private boolean checkBooleanCondition(LineInfo lineInfo, Scope curScope){
         String condition = lineInfo.getArgs()[1].trim();
         Var newVar = curScope.containsRecorsive(condition);
-        if(newVar != null && (newVar.getVarType() == Var.BOOLEAN_INDEX ||
-                newVar.getVarType() == Var.DOUBLE_INDEX ||
-                newVar.getVarType() == Var.INT_INDEX)){
+        if(newVar != null && (newVar.getVarType().equals(Var.BOOLEAN_INDEX) ||
+                newVar.getVarType().equals(Var.DOUBLE_INDEX) ||
+                newVar.getVarType().equals(Var.INT_INDEX))){
             return true;
         }
         return false;
@@ -266,12 +291,11 @@ public class FileParser {
                     }
                 }
                 else{//if user send a value
-                    varFactory.creatVar(true, )
-
+                    varFactory.creatVar
+                            (true, origVar.getVarType(), false, "tmp", paramsNames[i]);
+                    //TODO - handle exception
                 }
-
             }
-
         }
         return false;
     }
