@@ -9,16 +9,16 @@ public abstract class Var{
 
 
     /*magic numbers represents types of vars*/
-    public static final int INT_INDEX = 0;
-    public static final int DOUBLE_INDEX = 1;
-    public static final int BOOLEAN_INDEX = 2;
-    public static final int STRING_INDEX = 3;
-    public static final int CHAR_INDEX = 4;
+    public static final String INT_INDEX = "INT_INDEX";
+    public static final String DOUBLE_INDEX = "DOUBLE_INDEX";
+    public static final String BOOLEAN_INDEX = "BOOLEAN_INDEX";
+    public static final String STRING_INDEX = "STRING_INDEX";
+    public static final String CHAR_INDEX = "CHAR_INDEX";
     /*magic numbers - end*/
 
     /*object parameters*/
     protected boolean isInitialized;
-    protected int varType;
+    protected String varType;
     protected boolean isFinal;
     protected String varName;
     /*object parameters - end*/
@@ -50,7 +50,7 @@ public abstract class Var{
      *
      * @return
      */
-    public int getVarType() {
+    public String getVarType() {
         return varType;
     }
 
@@ -82,12 +82,13 @@ public abstract class Var{
      * @param secondType
      * @return
      */
-    public boolean areTypesMatch(int firstType, int secondType){
+    public boolean areTypesMatch(String firstType, String secondType){
         switch (firstType){
             case DOUBLE_INDEX: // double can get also int
-                return (secondType==INT_INDEX || secondType==DOUBLE_INDEX);
+                return (secondType.equals(INT_INDEX) || secondType.equals(DOUBLE_INDEX));
             case BOOLEAN_INDEX: // boolean can get double and int
-                return (secondType==INT_INDEX || secondType==DOUBLE_INDEX || secondType==BOOLEAN_INDEX);
+                return (secondType.equals(INT_INDEX) || secondType.equals(DOUBLE_INDEX) ||
+                        secondType.equals(BOOLEAN_INDEX));
             default: // the rest can get only themselves
                 return (firstType==secondType);
         }

@@ -46,7 +46,7 @@ public class IntVar extends Var{
      *
      * @return
      */
-    public int getVarType() {
+    public String  getVarType() {
         return Var.INT_INDEX;
     }
 }

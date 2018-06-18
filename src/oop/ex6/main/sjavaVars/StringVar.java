@@ -41,7 +41,7 @@ public class StringVar extends Var{
      *
      * @return
      */
-    public int getVarType(){
+    public String getVarType(){
         return Var.STRING_INDEX;
     }
 }

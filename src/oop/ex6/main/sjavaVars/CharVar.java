@@ -46,7 +46,7 @@ public class CharVar extends Var{
      *
      * @return
      */
-    public int getVarType(){
+    public String  getVarType(){
         return Var.CHAR_INDEX;
     }
 }

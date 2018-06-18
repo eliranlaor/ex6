@@ -56,7 +56,7 @@ public class DoubleVar extends Var{
      *
      * @return
      */
-    public int getVarType(){
+    public String getVarType(){
         return Var.DOUBLE_INDEX;
     }
 }
