@@ -9,11 +9,11 @@ public abstract class Var{
 
 
     /*magic numbers represents types of vars*/
-    static final int INT_INDEX = 0;
-    static final int DOUBLE_INDEX = 1;
-    static final int BOOLEAN_INDEX = 2;
-    static final int STRING_INDEX = 3;
-    static final int CHAR_INDEX = 4;
+    public static final int INT_INDEX = 0;
+    public static final int DOUBLE_INDEX = 1;
+    public static final int BOOLEAN_INDEX = 2;
+    public static final int STRING_INDEX = 3;
+    public static final int CHAR_INDEX = 4;
     /*magic numbers - end*/
 
     /*object parameters*/

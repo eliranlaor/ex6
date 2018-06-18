@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 
 public class FileParser {
     private Reader inFile;
@@ -199,7 +200,7 @@ public class FileParser {
                 if(currentLineInfo.getType() == MatcherWrapper.END_SCOPE){
                     return;
                 }
-                updateInternalScope(currentLineInfo);
+                updateInternalScope(currentLineInfo, currentScope);
 
 
                 currentLine = buffer.readLine();
@@ -213,17 +214,69 @@ public class FileParser {
         }
     }
 
-    private void updateInternalScope(LineInfo currentLineInfo) { //TODO
+    private void updateInternalScope(LineInfo currentLineInfo, Scope curScope) { //TODO
 
         switch(currentLineInfo.getType()){
-            case MatcherWrapper.REGEX_1:
+            case Regexes.IF_WHILE:
+                if(checkBooleanCondition(currentLineInfo, curScope)){
+                    InternalScope newScope = new InternalScope(curScope);
+                    parseScope(newScope);
+                }
+                else{
+                    //TODO - throw an exception
+                }
                 break;
-            case MatcherWrapper.REGEX_2:
+            case Regexes.FUNCTION_CALL:
+
                 break;
             case MatcherWrapper.REGEX_3:
                 break;
         }
     }
+
+    private boolean checkBooleanCondition(LineInfo lineInfo, Scope curScope){
+        String condition = lineInfo.getArgs()[1].trim();
+        Var newVar = curScope.containsRecorsive(condition);
+        if(newVar != null && (newVar.getVarType() == Var.BOOLEAN_INDEX ||
+                newVar.getVarType() == Var.DOUBLE_INDEX ||
+                newVar.getVarType() == Var.INT_INDEX)){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkFunctionCall(LineInfo lineInfo, Scope curScope){
+        String[] functionCallArgs = lineInfo.getArgs();
+        String funcName = functionCallArgs[0].trim();
+        FunctionSignature func = globalScope.getFunction(funcName);
+        if(func != null){
+            ArrayList<Var> originalArgs = func.getVars();
+            String[] paramsNames = functionCallArgs[1].replaceAll(" ", "").split(",");
+            if(originalArgs.size() != paramsNames.length){
+                return false;
+            }
+            Var origVar;
+            Var argVar;
+            for(int i = 0; i < originalArgs.size(); i++){
+                origVar = originalArgs.get(i);
+                argVar = curScope.containsRecorsive(paramsNames[i]);
+                if(argVar != null){ //if user send a variable
+                    if(!origVar.areTypesMatch(origVar.getVarType(), argVar.getVarType())){
+                        return false;
+                    }
+                }
+                else{//if user send a value
+                    varFactory.creatVar(true, )
+
+                }
+
+            }
+
+        }
+        return false;
+    }
+
+
 
 
 
