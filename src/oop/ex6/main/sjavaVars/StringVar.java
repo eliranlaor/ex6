@@ -2,9 +2,11 @@ package oop.ex6.main.sjavaVars;
 
 import oop.ex6.main.Regexes;
 import oop.ex6.main.SyntaxException;
-
 import java.util.regex.Pattern;
 
+/**
+ * represents a Var of type String
+ */
 public class StringVar extends Var{
 
     private String value;
