@@ -55,10 +55,10 @@ public class FileParser {
         String[] args = lineInfo.getArgs();
         Var var = scope.containsRecorsive(args[0]);
         if(var == null){
-            //TODO - need to throw an exception
+            throw new SyntaxException(); //non var name
         }
         if(var.isFinal() && var.isInitialized()){
-            //TODO - need to throw an exception
+            
         }
         String value = args[1].trim();
         Var secondVar = scope.containsRecorsive(value);
@@ -97,7 +97,7 @@ public class FileParser {
         for(int i = 0; i < varNames.length; i++){
             String[] tempString = varNames[i].split("=");
             if(scope.containsInScope(tempString[0]) != null){
-                //TODO throw exception - trying to initial an already existing var
+                throw new ExistingVarException();
             }
             if(tempString.length > 1){ //declaring and initialing var
                 newVar = varFactory.creatVar(true, varType, isFinal, tempString[0],
@@ -113,10 +113,6 @@ public class FileParser {
 
     private void updateGlobalScope(GlobalScope global, LineInfo currentLineInfo) throws IOException,
             JavacException{
-        //TODO
-
-        //if we encounter if/while blocks - we need to throw an exception
-
         //when encountering function declaration, we need to update line buffer to the end of that function.
         switch(currentLineInfo.getType()){
             case Regexes.VAR_DECELERATION:
@@ -151,14 +147,15 @@ public class FileParser {
                 findEndOfFunction();
             }
             if(currentLineInfo.getType() == Regexes.FUNCTION_DECELERATION){
-                throw new SyntaxException();//TODO new exception-same as the one we need to add in 5 lines
+                throw new FuncDeclerationInFuncException();
+                // add in 5 lines
             }
         }
         //if we got here - there was an illegal functionality
-        throw new SyntaxException();//TODO new exception
+        throw new SyntaxException();
     }
 
-    private void secondParse(Scope currentScope)throws IOException, SyntaxException{
+    private void secondParse(Scope currentScope)throws IOException, JavacException{
         String currentLine = buffer.readLine();
         LineInfo currentLineInfo;
         while(currentLine != null) {
@@ -175,7 +172,7 @@ public class FileParser {
     }
 
 
-    private void parseScope(Scope currentScope) throws IOException, SyntaxException{
+    private void parseScope(Scope currentScope) throws IOException, JavacException{
         String currentLine = buffer.readLine();
         LineInfo currentLineInfo;
         while(currentLine != null){
@@ -188,39 +185,36 @@ public class FileParser {
         }
     }
 
-    private void updateInternalScope(LineInfo currentLineInfo, Scope curScope) throws IOException {
-        try {
-            returnFlag = false;
-            switch (currentLineInfo.getType()) {
-                case Regexes.IF_WHILE:
-                    if (checkBooleanCondition(currentLineInfo, curScope)) {
-                        InternalScope newScope = new InternalScope(curScope);
-                        parseScope(newScope);
-                    } else {
-                        throw new SyntaxException();
-                    }
-                    break;
-                case Regexes.FUNCTION_CALL:
-                    if (!checkFunctionCall(currentLineInfo, curScope)) {
-                        throw new SyntaxException();
-                    }
-                    break;
-                case Regexes.EMPTY_LINE_COMMENT:
-                    break;
-                case Regexes.RETURN_REGEX:
-                    returnFlag = true;
-                    break;
-                case Regexes.ASSIGNMENT:
-                    assigment(currentLineInfo, curScope);
-                    break;
-                case Regexes.VAR_DECELERATION:
-                    varDeclaration(currentLineInfo, curScope);
-                    break;
-            }
+    private void updateInternalScope(LineInfo currentLineInfo, Scope curScope) throws IOException ,
+            JavacException{
+        returnFlag = false;
+        switch (currentLineInfo.getType()) {
+            case Regexes.IF_WHILE:
+                if (checkBooleanCondition(currentLineInfo, curScope)) {
+                    InternalScope newScope = new InternalScope(curScope);
+                    parseScope(newScope);
+                } else {
+                    throw new SyntaxException();
+                }
+                break;
+            case Regexes.FUNCTION_CALL:
+                if (!checkFunctionCall(currentLineInfo, curScope)) {
+                    throw new SyntaxException();
+                }
+                break;
+            case Regexes.EMPTY_LINE_COMMENT:
+                break;
+            case Regexes.RETURN_REGEX:
+                returnFlag = true;
+                break;
+            case Regexes.ASSIGNMENT:
+                assigment(currentLineInfo, curScope);
+                break;
+            case Regexes.VAR_DECELERATION:
+                varDeclaration(currentLineInfo, curScope);
+                break;
         }
-        catch(SyntaxException e){
-            //TODO - handle exception
-        }
+
     }
 
     private boolean checkBooleanCondition(LineInfo lineInfo, Scope curScope){
@@ -234,7 +228,7 @@ public class FileParser {
         return false;
     }
 
-    private boolean checkFunctionCall(LineInfo lineInfo, Scope curScope)throws SyntaxException{
+    private boolean checkFunctionCall(LineInfo lineInfo, Scope curScope)throws JavacException{
         String[] functionCallArgs = lineInfo.getArgs();
         String funcName = functionCallArgs[0].trim();
         FunctionSignature func = globalScope.getFunction(funcName);
