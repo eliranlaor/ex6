@@ -1,6 +1,5 @@
 package oop.ex6.main.sjavaVars;
 
-import oop.ex6.main.InitializationException;
 import oop.ex6.main.SyntaxException;
 
 /**
