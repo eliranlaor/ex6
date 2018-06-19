@@ -17,9 +17,12 @@ public class Sjavac {
             fileParser.parse();
         }
         catch(IOException e){
-            return 0;
+            return 2;
         }
-        return 1; //TODO - tentative
+        catch(Exception e){
+            return 1;
+        }
+        return 0;
     }
 
 
