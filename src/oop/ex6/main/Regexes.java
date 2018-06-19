@@ -8,7 +8,7 @@ public class Regexes {
     private static final String INT = "int", DOUBLE = "double", STRING = "String", FINAL = "final ",
             BOOLEAN="boolean", CHAR="char", COMMA=",", EQUAL="=", SPACE = "\\s", RETURN = "return",
             SEMICOLON = ";" , VOID = "void" , OPEN_ROUND_BRACKET = "\\(" , CLOSE_ROUND_BRACKET = "\\)",
-            IF = "if", WHILE = "while", OPEN_CURLY_BRACKETS = "\\{";
+            IF = "if", WHILE = "while", OPEN_CURLY_BRACKETS = "\\{", AND = "\\&\\&", OR = "\\|\\|";
 
     private static final String SPACES = SPACE + "*";
     private static final String SPACES_PLUS = SPACE + "+";
@@ -42,9 +42,10 @@ public class Regexes {
     /* Regexes for Vars Checks - end*/
 
 
-    private static final String CONDITION =
+    private static final String SINGLE_CONDITION =
             "(" + TRUE + "|" + FALSE + "|" + DOUBLE_REGEX + "|" + VAR_NAME + ")";
-
+    private static final String AND_OR = "(" + AND + "|" + OR + ")";
+    private static final String CONDITION = "";
 
     /* Regexes for MatcherWrapper */
 
