@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class FileParser {
     private Reader inFile;
@@ -150,6 +151,7 @@ public class FileParser {
                 throw new FuncDeclerationInFuncException();
                 // add in 5 lines
             }
+            currentLine = buffer.readLine();
         }
         //if we got here - there was an illegal functionality
         throw new SyntaxException();
@@ -217,12 +219,19 @@ public class FileParser {
 
     }
 
-    private boolean checkBooleanCondition(LineInfo lineInfo, Scope curScope){
+    private boolean checkBooleanCondition(LineInfo lineInfo, Scope curScope) throws JavacException{
         String condition = lineInfo.getArgs()[1].trim();
         Var newVar = curScope.containsRecorsive(condition);
         if(newVar != null && (newVar.getVarType().equals(Var.BOOLEAN_INDEX) ||
                 newVar.getVarType().equals(Var.DOUBLE_INDEX) ||
                 newVar.getVarType().equals(Var.INT_INDEX))){
+            return true;
+        }
+        if(condition.equals(Regexes.TRUE) || condition.equals(Regexes.FALSE)){
+            return true;
+        }
+        Pattern pattern = Pattern.compile(Regexes.DOUBLE_REGEX);
+        if(pattern.matcher(condition).matches()){
             return true;
         }
         return false;

@@ -6,9 +6,9 @@ package oop.ex6.main;
 public class Regexes {
 
     private static final String INT = "int", DOUBLE = "double", STRING = "String", FINAL = "final ",
-            BOOLEAN="boolean", CHAR="char", COMMA=",", EQUAL="=", SPACE = "\\s+", RETURN = "return",
-            SEMICOLON = ";" , VOID = "void" , OPEN_ROUND_BRACKET = "/(" , CLOSE_ROUND_BRACKET = "/)",
-            IF = "if", WHILE = "while", OPEN_CURLY_BRACKETS = "{";
+            BOOLEAN="boolean", CHAR="char", COMMA=",", EQUAL="=", SPACE = "\\s", RETURN = "return",
+            SEMICOLON = ";" , VOID = "void" , OPEN_ROUND_BRACKET = "\\(" , CLOSE_ROUND_BRACKET = "\\)",
+            IF = "if", WHILE = "while", OPEN_CURLY_BRACKETS = "\\{";
 
     private static final String SPACES = SPACE + "*";
     private static final String SPACES_PLUS = SPACE + "+";
@@ -18,11 +18,11 @@ public class Regexes {
     private static final String VAR_NAME = "_\\w+|[a-zA-Z]\\w*";
     private static final String VAR_VALUE = "([^\\n\\r]*)";
     private static final String VAR_NAME_EQUAL = VAR_NAME + "(" + SPACES + EQUAL + SPACES + VAR_VALUE + ")?";
-    private static final String VAR_NAME_COMMA = VAR_NAME_EQUAL + SPACES + COMMA + SPACES;
+    private static final String VAR_NAME_COMMA = "(" + VAR_NAME_EQUAL + SPACES + COMMA + SPACES + ")";
     private static final String VAR_NAME_COMMAS = "(" + VAR_NAME_COMMA + "*" + VAR_NAME_EQUAL + ")";
     private final static String VAR_NAME_VALUE = "(" + VAR_NAME + "|[^\\n\\r]*)";
     private static final String VAR_COMMAS =
-            "(" + VAR_NAME_VALUE + ")?|" + "(" + VAR_NAME_VALUE + SPACES + COMMA + SPACES + ")*"
+            "(" + VAR_NAME_VALUE + "?|" + "(" + VAR_NAME_VALUE + SPACES + COMMA + SPACES + ")*"
                     + VAR_NAME_VALUE + ")";
     private static final String FUNCTION_NAME = "([a-zA-Z]\\w*)";
     private static final String FUNCTION_ARG = "(" + "(" + FINAL + ")?" + VAR_TYPE + SPACES_PLUS + VAR_NAME
@@ -60,7 +60,7 @@ public class Regexes {
 
     public final static String EMPTY_LINE_COMMENT = "(" + SPACES + "|" + COMMENT + ")";
 
-    public final static String CLOSING_CURLY_BRACKETS = SPACES + "}" + SPACES;
+    public final static String CLOSING_CURLY_BRACKETS = SPACES + "\\}" + SPACES;
 
     public final static String FUNCTION_DECELERATION =
             SPACES + VOID + SPACES_PLUS + FUNCTION_NAME + SPACES + OPEN_ROUND_BRACKET + SPACES +
@@ -68,12 +68,14 @@ public class Regexes {
 
     public final static String FUNCTION_CALL =
             SPACES + FUNCTION_NAME + SPACES + OPEN_ROUND_BRACKET + SPACES + VAR_COMMAS + SPACES +
-                    OPEN_ROUND_BRACKET + SEMICOLON + SPACES;
+                    CLOSE_ROUND_BRACKET + SEMICOLON + SPACES;
 
     public final static String IF_WHILE =
-            SPACES + "(" + IF + "|" + WHILE + ")" + CONDITION + SPACES + OPEN_CURLY_BRACKETS + SPACES;
+            SPACES + "(" + IF + "|" + WHILE + ")" + SPACES + OPEN_ROUND_BRACKET + SPACES + CONDITION +
+                    SPACES + CLOSE_ROUND_BRACKET + SPACES + OPEN_CURLY_BRACKETS + SPACES;
 
-    public final static String[] REGEXES = {VAR_DECELERATION, ASSIGNMENT, RETURN_REGEX, EMPTY_LINE_COMMENT,
+    public final static String[] REGEXES = {VAR_DECELERATION, ASSIGNMENT, RETURN_REGEX,
+            EMPTY_LINE_COMMENT,
             CLOSING_CURLY_BRACKETS, FUNCTION_DECELERATION, FUNCTION_CALL, IF_WHILE};
 
     /* Regexes for MatcherWrapper - end */

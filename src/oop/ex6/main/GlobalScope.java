@@ -11,10 +11,12 @@ public class GlobalScope extends Scope{
     public GlobalScope(){
         this.parentScope = null;
         functionsSignature = new ArrayList<>();
+        this.vars = new ArrayList<>();
     }
 
-    public void addFunctionDeclaration(LineInfo funcDeclaration){
+    public void addFunctionDeclaration(LineInfo funcDeclaration) throws JavacException{
         FunctionSignature func = new FunctionSignature(funcDeclaration);
+        functionsSignature.add(func);
     }
 
     @Override

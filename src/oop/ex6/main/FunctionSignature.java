@@ -11,16 +11,17 @@ public class FunctionSignature {
     private VarFactory varFactory;
 
 
-    public FunctionSignature(LineInfo lineInfo){
-        setAll(lineInfo);
+    public FunctionSignature(LineInfo lineInfo) throws JavacException{
         this.vars = new ArrayList<>();
         varFactory = new VarFactory();
+        setAll(lineInfo);
     }
 
-    private void setAll(LineInfo lineInfo){
+    private void setAll(LineInfo lineInfo) throws JavacException{
         String[] args = lineInfo.getArgs();
         this.name = args[0];
         String[] varNames = args[1].split(",");
+        if(varNames.length == 1 && varNames[0].equals("")){return;}
         boolean isFinal = false;
         String varType;
         String varName;
