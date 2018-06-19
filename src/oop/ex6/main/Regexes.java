@@ -45,7 +45,9 @@ public class Regexes {
     private static final String SINGLE_CONDITION =
             "(" + TRUE + "|" + FALSE + "|" + DOUBLE_REGEX + "|" + VAR_NAME + ")";
     public static final String AND_OR = "(" + AND + "|" + OR + ")";
-    private static final String CONDITION = "";
+    private static final String CONDITION =
+            "(" + SINGLE_CONDITION + "?|" + "(" + SINGLE_CONDITION + SPACES + AND_OR + SPACES + ")*" +
+                    SINGLE_CONDITION + ")";
 
     /* Regexes for MatcherWrapper */
 
@@ -76,8 +78,7 @@ public class Regexes {
                     SPACES + CLOSE_ROUND_BRACKET + SPACES + OPEN_CURLY_BRACKETS + SPACES;
 
     public final static String[] REGEXES = {VAR_DECELERATION, ASSIGNMENT, RETURN_REGEX,
-            EMPTY_LINE_COMMENT,
-            CLOSING_CURLY_BRACKETS, FUNCTION_DECELERATION, FUNCTION_CALL, IF_WHILE};
+            EMPTY_LINE_COMMENT, CLOSING_CURLY_BRACKETS, FUNCTION_DECELERATION, FUNCTION_CALL, IF_WHILE};
 
     /* Regexes for MatcherWrapper - end */
 
