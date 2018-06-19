@@ -44,7 +44,7 @@ public class Regexes {
 
     private static final String SINGLE_CONDITION =
             "(" + TRUE + "|" + FALSE + "|" + DOUBLE_REGEX + "|" + VAR_NAME + ")";
-    private static final String AND_OR = "(" + AND + "|" + OR + ")";
+    public static final String AND_OR = "(" + AND + "|" + OR + ")";
     private static final String CONDITION = "";
 
     /* Regexes for MatcherWrapper */
