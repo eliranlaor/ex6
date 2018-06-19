@@ -19,7 +19,7 @@ public class Sjavac {
         catch(IOException e){
             return 2;
         }
-        catch(Exception e){
+        catch(JavacException e){
             return 1;
         }
         return 0;
