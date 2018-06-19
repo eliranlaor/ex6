@@ -31,35 +31,27 @@ public class FileParser {
         buffer = new BufferedReader(inFile);
     }
 
-    public void parse() throws IOException, SyntaxException{
+    public void parse() throws IOException, JavacException{
         globalScope = firstParse();
         resetFileBuffer();
         secondParse(globalScope);
     }
 
-    private GlobalScope firstParse() throws IOException{
-        try{
-            GlobalScope globalScope = new GlobalScope();
-            LineInfo currentLineInfo;
-            String currentLine = buffer.readLine();
-            while(currentLine != null) {
-                currentLineInfo = matcherWrapper.match(currentLine);
-                updateGlobalScope(globalScope, currentLineInfo);
-                currentLine = buffer.readLine();
-            }
-            return globalScope;
+    private GlobalScope firstParse() throws IOException, JavacException{
+        GlobalScope globalScope = new GlobalScope();
+        LineInfo currentLineInfo;
+        String currentLine = buffer.readLine();
+        while(currentLine != null) {
+            currentLineInfo = matcherWrapper.match(currentLine);
+            updateGlobalScope(globalScope, currentLineInfo);
+            currentLine = buffer.readLine();
         }
-        catch(IOException e){ //TODO complete this functionality
-            return null;
-        }
-        catch(SyntaxException e){
-            return null;
-        }
+        return globalScope;
     }
 
 
 
-    private void assigment(LineInfo lineInfo, Scope scope) throws SyntaxException{
+    private void assigment(LineInfo lineInfo, Scope scope) throws JavacException{
         String[] args = lineInfo.getArgs();
         Var var = scope.containsRecorsive(args[0]);
         if(var == null){
@@ -88,7 +80,7 @@ public class FileParser {
     }
 
 
-    private void varDeclaration(LineInfo lineInfo, Scope scope) throws SyntaxException{
+    private void varDeclaration(LineInfo lineInfo, Scope scope) throws JavacException{
         String[] args = lineInfo.getArgs();
         boolean isFinal = false;
         Var newVar;
@@ -120,7 +112,7 @@ public class FileParser {
 
 
     private void updateGlobalScope(GlobalScope global, LineInfo currentLineInfo) throws IOException,
-            SyntaxException{
+            JavacException{
         //TODO
 
         //if we encounter if/while blocks - we need to throw an exception
@@ -147,7 +139,7 @@ public class FileParser {
         }
     }
 
-    private void findEndOfFunction() throws IOException, SyntaxException{
+    private void findEndOfFunction() throws IOException, JavacException{
         String currentLine = buffer.readLine();
         LineInfo currentLineInfo;
         while(currentLine != null){
