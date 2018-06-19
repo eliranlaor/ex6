@@ -58,19 +58,19 @@ public class FileParser {
             throw new SyntaxException(); //non var name
         }
         if(var.isFinal() && var.isInitialized()){
-            
+            throw new FinalVarAssignment();
         }
         String value = args[1].trim();
         Var secondVar = scope.containsRecorsive(value);
         if(secondVar != null){
             if(secondVar.isInitialized()) {
                 if(!var.areTypesMatch(var.getVarType(), secondVar.getVarType())){
-                    //TODO - throw exception
+                    throw new SyntaxException(); //types don't match
                 }
                 var.setInitialized();
             }
             else{
-                //TODO - need to throw an exception - usage of uninitialized variable
+                throw new UninitializedException();
             }
         }
         else{
