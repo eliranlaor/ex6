@@ -32,7 +32,8 @@ public class BooleanVar extends Var{
         // don't care for value in case it comes from function deceleration (value is not known).
         if (value != null){
             setValue(value);
-        }    }
+        }
+    }
 
     @Override
     public void setValue(String value) throws SyntaxException {
