@@ -35,9 +35,10 @@ public class MatcherWrapper {
         for (int i = 0; i < Regexes.REGEXES.length; i++) {
             if (patterns[i].matcher(line).matches()){
                 matcher = patterns[i].matcher(line);
+                matcher.matches(); //class requirement
                 String[] lineInfoArgs = new String[matcher.groupCount()];
                 for (int j = 1; j <= matcher.groupCount(); j++) {
-                    lineInfoArgs[j] = matcher.group(j);
+                    lineInfoArgs[j-1] = matcher.group(j);
                 }
                 return new LineInfo(Regexes.REGEXES[i], lineInfoArgs);
             }

@@ -10,12 +10,12 @@ import java.util.ArrayList;
 public abstract class Scope {
 
     protected Scope parentScope;
-    private ArrayList<Var> vars;
+    protected ArrayList<Var> vars;
 
     /**
      *
      */
-    public Scope(){} //TODO
+    public Scope(){}
 
     /**
      *

@@ -11,18 +11,18 @@ public class Sjavac {
         filePathToParse = filePath;
     }
 
-    private int runCheck(){
+    private void runCheck(){
         try {
             FileParser fileParser = new FileParser(filePathToParse);
             fileParser.parse();
+            System.out.println(0);
         }
         catch(IOException e){
-            return 2;
+            System.out.println(2);
         }
         catch(JavacException e){
-            return 1;
+            System.out.println(1);
         }
-        return 0;
     }
 
 
